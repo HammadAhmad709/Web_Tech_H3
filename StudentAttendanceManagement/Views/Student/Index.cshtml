@@ -1,0 +1,49 @@
+﻿@model List<StudentAttendanceManagement.Models.Student>
+
+<h2>Students</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">
+    Add Student
+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Registration Number</th>
+            <th>Department</th>
+            <th>Attendance %</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.Id</td>
+                <td>@student.Name</td>
+                <td>@student.RegistrationNumber</td>
+                <td>@student.Department</td>
+                <td>@student.AttendancePercentage</td>
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@student.Id"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <form asp-action="Delete"
+                          asp-route-id="@student.Id"
+                          method="post"
+                          style="display:inline"
+                          onsubmit="return confirm('Delete this student?');">
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
